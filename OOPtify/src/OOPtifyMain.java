@@ -8,7 +8,7 @@ public class OOPtifyMain extends JFrame implements ActionListener {
         setLayout(null);
 
         // JUSTIN PART
-        JLabel lbltest = new JLabel("test");
+
         
         // JOHN GLAY PART
         JLabel lblNum = new JLabel("#");
@@ -16,19 +16,18 @@ public class OOPtifyMain extends JFrame implements ActionListener {
         JLabel lblArtist= new JLabel("Artist");
         JLabel lblDuration= new JLabel("Duration", JLabel.LEFT);
 
-        add(lbltest);
         add(lblNum);
         add(lblTitle);
         add(lblArtist);
         add(lblDuration);
 
-        lbltest.setFont(new Font("Arial", Font.BOLD, 18));
+
         lblNum.setFont(new Font("Arial", Font.BOLD, 18));
         lblTitle.setFont(new Font("Arial", Font.BOLD, 18));
         lblArtist.setFont(new Font("Arial", Font.BOLD, 18));
         lblDuration.setFont(new Font("Arial", Font.BOLD, 18));
 
-        lbltest.setBounds(60, 160, 195, 50);
+
         lblNum.setBounds(60, 60, 195, 50);
         lblTitle.setBounds(255, 60, 195, 50);
         lblArtist.setBounds(450, 60, 195, 50);
