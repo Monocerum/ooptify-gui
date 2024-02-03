@@ -86,7 +86,26 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         setLayout(null);
 
         // JUSTIN PART
-
+        
+        JLabel lblUser = new JLabel("USERNAME");
+        JLabel lblDate = new JLabel("--/--/----");
+        JLabel lblCat = new JLabel("Category");
+        JLabel lblTimeP = new JLabel("Time Period");
+        JLabel lblLength = new JLabel("Length");
+        
+        JComboBox<String> ComBCat = new JComboBox<>();
+        ComBCat.addItem("Top Tracks");
+        ComBCat.addItem("Top Artists");
+        ComBCat.addItem("Top Genres");
+        
+        JCheckBox TP1 = new JCheckBox("Last Month");
+        JCheckBox TP2 = new JCheckBox("Last 6 Months");
+        JCheckBox TP3 = new JCheckBox("Last Year");
+        
+        JCheckBox Len1 = new JCheckBox("Top 10");
+        JCheckBox Len2 = new JCheckBox("Top 50");
+        
+        
         // JOHN GLAY PART
         JLabel lblNum = new JLabel("#");
         JLabel lblTitle = new JLabel("TITLE");
