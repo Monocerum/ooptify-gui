@@ -1,17 +1,13 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.*;
 import javax.swing.border.*;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.swing.UIManager.LookAndFeelInfo;
 
 public class OOPtifyLaunch extends JFrame implements ActionListener {
     JPanel pnlCenter;
     JLabel lblImage, lblIcon, lblTitle, lblWelcome, lblMainTitle;
-    JButton btnLaunch;
+    RoundButton btnLaunch;
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem icon, title;
@@ -32,8 +28,6 @@ public class OOPtifyLaunch extends JFrame implements ActionListener {
         this.setResizable(false);
 
         setLocationRelativeTo(null);
-
-        EmptyBorder margin = new EmptyBorder(20, 0, 0, 0);
 
         this.setLayout(new BorderLayout());
 
@@ -67,10 +61,17 @@ public class OOPtifyLaunch extends JFrame implements ActionListener {
         pnlCenter.setOpaque(false);
 
         lblImage = new JLabel(mainLogo);
+
+        JPanel pnlTtl;
+        pnlTtl = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         lblMainTitle = new JLabel("OOPtify");
         lblMainTitle.setFont(new Font("Gotham-Bold", Font.PLAIN, 70));
         lblMainTitle.setForeground(Color.white);
+
+        pnlTtl.setBorder(new EmptyBorder(0, 0, 20, 0));
+        pnlTtl.setOpaque(false);
+        pnlTtl.add(lblMainTitle);
 
         JPanel pnlLbl;
         pnlLbl = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 2));
@@ -78,22 +79,24 @@ public class OOPtifyLaunch extends JFrame implements ActionListener {
         lblWelcome.setFont(new Font("Gotham-Light", Font.PLAIN, 30));
         lblWelcome.setForeground(Color.white);
 
-        pnlLbl.setBorder(margin);
+        pnlLbl.setBorder(new EmptyBorder(20, 0, -5, 0));
         pnlLbl.setOpaque(false);
         pnlLbl.add(lblWelcome);
 
-        btnLaunch = new JButton("Launch");
+        btnLaunch = new RoundButton("Launch");
         btnLaunch.setFont(new Font("Gotham", Font.BOLD, 18));
-        btnLaunch.setPreferredSize(new Dimension(180, 50));
+        btnLaunch.setPreferredSize(new Dimension(250, 50));
         btnLaunch.setBackground(new Color(29, 185, 84));
         btnLaunch.setForeground(Color.black);
         btnLaunch.setBorderPainted(false);
         btnLaunch.setFocusable(false);
         btnLaunch.addActionListener(this);
 
+        btnLaunch.setBorder(new EmptyBorder(20, 20, 20, 20));
+
         pnlCenter.add(lblImage);
         pnlCenter.add(pnlLbl);
-        pnlCenter.add(lblMainTitle);
+        pnlCenter.add(pnlTtl);
         pnlCenter.add(btnLaunch);
 
         lblImage.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -115,7 +118,7 @@ public class OOPtifyLaunch extends JFrame implements ActionListener {
         if (e.getSource() == btnLaunch)
         {
             String[] options = {"Placeholder 1", "Placeholder 2", "Placeholder 3"};
-            Object selected = JOptionPane.showInputDialog(null, "Message", "Title", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            Object selected = JOptionPane.showInputDialog(null, "Choose User:", "Title", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
             if (names[0].equals(selected))
             {
@@ -135,38 +138,37 @@ public class OOPtifyLaunch extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) throws UnsupportedLookAndFeelException, ClassNotFoundException {
-        
-        try 
-        {
-            // Here you can select the selected theme class name in JTatt
-            UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
-        } 
-        catch (InstantiationException ex) 
-        {
-            Logger.getLogger(OOPtifyLaunch.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        catch (IllegalAccessException ex) 
-        {
-            Logger.getLogger(OOPtifyLaunch.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (ClassNotFoundException ex) 
-        {
-            Logger.getLogger(OOPtifyLaunch.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (UnsupportedLookAndFeelException ex)
-        {
-            Logger.getLogger(OOPtifyLaunch.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    public static void main(String[] args) {
+        new OOPtifyLaunch();
+    }
 
-        java.awt.EventQueue.invokeLater(new Runnable() { 
-            @Override
-            public void run() { 
-                new OOPtifyLaunch();
-            } 
-        });
+    class RoundButton extends JButton {
+    
+        public RoundButton(String text) 
+        {
+            super(text); // Invoke superclass (JButton)
+            setContentAreaFilled(false);
+            setFocusPainted(false);
+            setBorderPainted(false);
+        }
+    
+        @Override
+        public void paint(Graphics btn) 
+        {
+            Graphics2D btn1 = (Graphics2D) btn.create();
+            btn1.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            
+            btn1.setColor(new Color(29, 185, 84));
+            btn1.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 25, 25);
 
-        
+            RoundRectangle2D btnRound = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 25, 25);
 
+            btn1.draw(btnRound);
+
+            btn1.setColor(getForeground());
+            btn1.drawString(getText(), (getWidth() - btn1.getFontMetrics().stringWidth(getText())) / 2, (getHeight() + btn1.getFontMetrics().getAscent() - btn1.getFontMetrics().getDescent()) / 2);
+    
+            btn1.dispose();
+        }
     }
 }
