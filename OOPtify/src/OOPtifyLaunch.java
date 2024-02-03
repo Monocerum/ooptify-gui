@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class OOPtifyLaunch extends JFrame implements ActionListener {
     JPanel pnlCenter;
-    JLabel imageLabel, iconLabel, titleLabel, lblHome;
+    JLabel lblImage, lblIcon, lblTitle, lblHome;
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem icon, title;
@@ -16,7 +16,6 @@ public class OOPtifyLaunch extends JFrame implements ActionListener {
 
     OOPtifyLaunch()
     {
-        
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(900, 800);
         this.setIconImage(logo.getImage());
@@ -35,16 +34,15 @@ public class OOPtifyLaunch extends JFrame implements ActionListener {
 
         menuBar.setLayout(new FlowLayout(FlowLayout.LEADING, 18, 10));
 
-        iconLabel = new JLabel(menuLogo);
-        titleLabel = new JLabel("OOPtify");
-        titleLabel.setFont(new Font("Gotham-Black", Font.PLAIN, 15));
+        lblIcon = new JLabel(menuLogo);
+        lblTitle = new JLabel("OOPtify");
+        lblTitle.setForeground(Color.black);
+        lblTitle.setFont(new Font("Gotham-Black", Font.PLAIN, 15));
 
         icon.setIcon(menuLogo);
 
-        menuBar.add(iconLabel);
-        menuBar.add(titleLabel);
-
-    
+        menuBar.add(lblIcon);
+        menuBar.add(lblTitle);
 
         this.setJMenuBar(menuBar);
 
