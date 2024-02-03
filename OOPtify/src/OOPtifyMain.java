@@ -2,7 +2,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class OOPtifyMain extends JFrame implements ActionListener {
+public class OOPtifyMain extends JFrame implements ActionListener, ItemListener {
     JPanel pnlLeft, pnlRight, pnlInRight;
     JLabel lblImage, lblIcon, lblTitle;
     JButton btnHome;
@@ -66,15 +66,15 @@ public class OOPtifyMain extends JFrame implements ActionListener {
         pnlInRight.setBackground(new Color(29, 167, 78));
         pnlInRight.add(btnHome);
 
-        btnHome.setBorderPainted(false); 
-        btnHome.setContentAreaFilled(false); 
-        btnHome.setFocusable(false); 
+        btnHome.setBorderPainted(false);
+        btnHome.setContentAreaFilled(false);
+        btnHome.setFocusable(false);
         btnHome.setOpaque(false);
         btnHome.setFont(new Font("Gotham-Bold", Font.PLAIN, 18));
 
         btnHome.addActionListener(this);
 
-        pnlRight.setPreferredSize(new Dimension(900/6,60));
+        pnlRight.setPreferredSize(new Dimension(900 / 6, 60));
         pnlRight.add(pnlInRight, BorderLayout.CENTER);
         pnlRight.setOpaque(false);
 
@@ -82,31 +82,58 @@ public class OOPtifyMain extends JFrame implements ActionListener {
 
         this.setJMenuBar(menuBar);
         this.setVisible(true);
-        
+
         setLayout(null);
 
         // JUSTIN PART
 
         // JOHN GLAY PART
         JLabel lblNum = new JLabel("#");
-        JLabel lblTitle = new JLabel("Title");
-        JLabel lblArtist= new JLabel("Artist");
-        JLabel lblDuration= new JLabel("Duration", JLabel.LEFT);
+        JLabel lblTitle = new JLabel("TITLE");
+        JLabel lblArtists = new JLabel("ARTIST", JLabel.RIGHT);
+        JLabel lblDuration = new JLabel("PLAYS", JLabel.RIGHT);
 
         add(lblNum);
         add(lblTitle);
-        add(lblArtist);
+        add(lblArtists);
         add(lblDuration);
 
-        lblNum.setFont(new Font("Arial", Font.BOLD, 18));
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 18));
-        lblArtist.setFont(new Font("Arial", Font.BOLD, 18));
-        lblDuration.setFont(new Font("Arial", Font.BOLD, 18));
+        lblNum.setFont(new Font("Gotham-Black", Font.BOLD, 16));
+        lblTitle.setFont(new Font("Gotham-Black", Font.BOLD, 16));
+        lblArtists.setFont(new Font("Gotham-Black", Font.BOLD, 16));
+        lblDuration.setFont(new Font("Gotham-Black", Font.BOLD, 16));
 
-        lblNum.setBounds(60, 60, 195, 50);
-        lblTitle.setBounds(255, 60, 195, 50);
-        lblArtist.setBounds(450, 60, 195, 50);
-        lblDuration.setBounds(755, 60, 195, 50);
+        lblNum.setBounds(63, 40, 60, 40);
+        lblTitle.setBounds(120, 40, 200, 40);
+        lblArtists.setBounds(340, 40, 220, 40);
+        lblDuration.setBounds(570, 40, 255, 40);
+
+        int yOffset = 100; // Initial y-coordinate
+        int topLen = 10;
+
+        for (int i = 1; i <= topLen; i++) {
+            JLabel lblRank = new JLabel(String.format("%02d", i));
+            JLabel lblSong = new JLabel("Song Title " + String.format("%02d", i));
+            JLabel lblArtist = new JLabel("Name of the Artist", JLabel.RIGHT);
+            JLabel lblPlays = new JLabel("0000", JLabel.RIGHT);
+
+            add(lblRank);
+            add(lblSong);
+            add(lblArtist);
+            add(lblPlays);
+
+            lblRank.setBounds(60, yOffset, 60, 40);
+            lblSong.setBounds(120, yOffset, 200, 40);
+            lblArtist.setBounds(340, yOffset, 220, 40);
+            lblPlays.setBounds(570, yOffset, 254, 40);
+
+            lblRank.setFont(new Font("Gotham-Black", Font.PLAIN, 14));
+            lblSong.setFont(new Font("Gotham-Black", Font.PLAIN, 14));
+            lblArtist.setFont(new Font("Gotham-Black", Font.PLAIN, 14));
+            lblPlays.setFont(new Font("Gotham-Black", Font.PLAIN, 14));
+
+            yOffset += 45; // Increase y-coordinate for the next set of labels
+        }
 
         getContentPane().setBackground(Color.decode("#212121"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -120,10 +147,9 @@ public class OOPtifyMain extends JFrame implements ActionListener {
             frame.setLocationRelativeTo(null); // Center the frame on the screen
             frame.setVisible(true);
         });
-
     }
 
-    public void itemStateChanged(ActionEvent e) {
+    public void itemStateChanged(ItemEvent e) {
         // JUSTIN PART
 
         // JOHN GLAY PART
@@ -135,8 +161,7 @@ public class OOPtifyMain extends JFrame implements ActionListener {
 
         // JOHN GLAY PART
 
-        if (e.getSource() == btnHome)
-        {
+        if (e.getSource() == btnHome) {
             new OOPtifyLaunch();
             dispose();
         }
@@ -145,8 +170,11 @@ public class OOPtifyMain extends JFrame implements ActionListener {
 
     @Override // white line
     public void paint(Graphics g) {
-    super.paint(g);
-    g.setColor(Color.WHITE);
-    g.drawLine(60, 60, getWidth() - 60, 60);
+        super.paint(g);
+        g.setColor(Color.GRAY);
+        g.drawLine(60, 131, getWidth() - 60, 131);
+
+        g.setColor(Color.GRAY);
+        g.drawLine(60, 170, getWidth() - 60, 170);
     }
 }
