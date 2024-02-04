@@ -9,8 +9,8 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem icon, title;
-    ImageIcon logo = new ImageIcon("src/ooptify-gui/OOPtify/bin/images/Spotify_logo.png");
-    ImageIcon logoBlk = new ImageIcon("src/ooptify-gui/OOPtify/bin/images/Spotify.png");
+    ImageIcon logo = new ImageIcon("images/Spotify_logo.png");
+    ImageIcon logoBlk = new ImageIcon("images/Spotify.png");
     Image resizedIcon = logoBlk.getImage().getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
     ImageIcon menuLogo = new ImageIcon(resizedIcon);
 
@@ -18,11 +18,10 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
     JRadioButton YB1, YB2, YB3, LENB1, LENB2;
     JComboBox<String> ComBCat;
         
-    
     public OOPtifyMain() {
         // MENU BAR
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(1200, 1100);
+        this.setSize(1200, 1000);
         this.setIconImage(logo.getImage());
         this.getContentPane().setBackground(new Color(33, 33, 33));
         this.setTitle("OOPtify");
@@ -86,12 +85,11 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         menuBar.add(pnlRight, rgbc);
 
         this.setJMenuBar(menuBar);
-        this.setVisible(true);
 
         setLayout(null);
 
         // JUSTIN PART
-        ImageIcon UserIcon = new ImageIcon("src/ooptify-gui/OOPtify/bin/images/user.png");
+        ImageIcon UserIcon = new ImageIcon("images/user.png");
                 
         JLabel lblUserIcon = new JLabel(UserIcon);
         JLabel lblUser = new JLabel("USERNAME");
@@ -122,11 +120,11 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         add(lblYr);
         add(lblLength);
         
-        lblUser.setFont(new Font("Gotham-Black", Font.BOLD, 64));
-        lblDate.setFont(new Font("Gotham-Black", Font.BOLD, 32));
-        lblCat.setFont(new Font("Gotham-Black", Font.BOLD, 18));
-        lblYr.setFont(new Font("Gotham-Black", Font.BOLD, 18));
-        lblLength.setFont(new Font("Gotham-Black", Font.BOLD, 18));
+        lblUser.setFont(new Font("Gotham-BLACK", Font.PLAIN, 64));
+        lblDate.setFont(new Font("Gotham", Font.BOLD, 24));
+        lblCat.setFont(new Font("Gotham", Font.BOLD, 17));
+        lblYr.setFont(new Font("Gotham", Font.BOLD, 17));
+        lblLength.setFont(new Font("Gotham", Font.BOLD, 17));
 
         lblUserIcon.setBounds(125, 45, 200, 200);
         lblUser.setBounds(345, 25, 750, 100);
@@ -167,10 +165,16 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         
         YB1.setBounds(570, 200, 70, 45);
         YB2.setBounds(645, 200, 70, 45);
-        YB3.setBounds(720, 200, 80, 45);
-        LENB1.setBounds(835, 200, 70, 45);
-        LENB2.setBounds(910, 200, 70, 45);
-      
+        YB3.setBounds(720, 200, 90, 45);
+        LENB1.setBounds(835, 200, 90, 45);
+        LENB2.setBounds(930, 200, 90, 45);
+
+        YB1.setFocusable(false);
+        YB2.setFocusable(false);
+        YB3.setFocusable(false);
+        LENB1.setFocusable(false);
+        LENB2.setFocusable(false);
+    
         YB1.addActionListener(this);
         YB2.addActionListener(this);
         YB3.addActionListener(this);
@@ -213,7 +217,7 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         lblDuration.setBounds(590, 295, 255, 40);
 
         int yOffset = 345; // Initial y-coordinate
-        int topLen = 50;
+        int topLen = 10;
 
         for (int i = 1; i <= topLen; i++) {
             JLabel lblRank = new JLabel(String.format("%02d", i));
@@ -241,13 +245,16 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
 
         getContentPane().setBackground(Color.decode("#212121"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        this.repaint();
+        this.setVisible(true);
     }
 
     public static void main(String[] args) throws Exception {
         UIManager.put("Label.foreground", Color.WHITE); // To make the text color white
         SwingUtilities.invokeLater(() -> {
             OOPtifyMain frame = new OOPtifyMain();
-            frame.setSize(1200, 1100); // Set an initial size
+            frame.setSize(1200, 1000); // Set an initial size
             frame.setLocationRelativeTo(null); // Center the frame on the screen
             frame.setVisible(true);
         });
