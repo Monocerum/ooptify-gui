@@ -1,11 +1,13 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.*;
 
 public class OOPtifyMain extends JFrame implements ActionListener, ItemListener {
     JPanel pnlLeft, pnlRight, pnlInRight;
-    JLabel lblImage, lblIcon, lblTitle;
+    JLabel lblImage, lblIcon, lblTitle, lblPage;
     JButton btnHome;
+    RoundButton btnPrevious, btnNext;
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem icon, title;
@@ -246,6 +248,25 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         getContentPane().setBackground(Color.decode("#212121"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        btnPrevious = new RoundButton("Previous");
+        btnNext = new RoundButton("Next");
+
+        btnPrevious.setBounds(900, 800, 100, 50);
+        btnPrevious.setFont(new Font("Gotham", Font.BOLD, 17));
+        btnNext.setBounds(1020, 800, 100, 50);
+        btnNext.setFont(new Font("Gotham", Font.BOLD, 17));
+
+        btnPrevious.addActionListener(this);
+        btnNext.addActionListener(this);
+
+        lblPage = new JLabel("1/5");
+        lblPage.setFont(new Font("Gotham", Font.PLAIN, 15));
+        lblPage.setBounds(1095, 842, 100, 50);
+
+        this.add(btnPrevious);
+        this.add(btnNext);
+        this.add(lblPage);
+
         this.repaint();
         this.setVisible(true);
     }
@@ -272,23 +293,27 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         // JUSTIN PART
         
         if (YB1.isSelected()){
-             /*add arguments for when 2023 is selected*/
+            /*add arguments for when 2023 is selected*/
          }
         
         if (YB2.isSelected()){
-             /*add arguments for when 2022 is selected*/
+            /*add arguments for when 2022 is selected*/
          }
                   
         if (YB3.isSelected()){
-             /*add arguments for when All Time is selected*/
+            /*add arguments for when All Time is selected*/
          }
         
         if (LENB1.isSelected()){
-             /*add arguments for when Top 10 is selected*/
+            // disable btnPrevious and btnNext if selected
+            // set lblPage to 1/1
+            /*add arguments for when Top 10 is selected*/
          }
         
         if (LENB2.isSelected()){
-             /*add arguments for when Top 50 is selected*/
+            // enable btnPrevious and btnNext depending on current page if selected
+            // set lblPaget to n/5
+            /*add arguments for when Top 50 is selected*/
          }
         
         String selectedValue = ComBCat.getSelectedItem().toString();
@@ -305,6 +330,14 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
             //For Top Artists arguments
         }
         // JOHN GLAY PART
+
+        if (e.getSource() == btnPrevious) {
+            // If page 1, disable
+        }
+
+        if (e.getSource() == btnNext) {
+            // If page 5, disable
+        }
 
         if (e.getSource() == btnHome) {
             new OOPtifyLaunch();
@@ -325,4 +358,33 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         g.drawLine(60, 425, getWidth() - 60, 425); 
     }
     
+    class RoundButton extends JButton {
+    
+        public RoundButton(String text) 
+        {
+            super(text); // Invoke superclass (JButton)
+            setContentAreaFilled(false);
+            setFocusPainted(false);
+            setBorderPainted(false);
+        }
+    
+        @Override
+        public void paint(Graphics btn) 
+        {
+            Graphics2D btn1 = (Graphics2D) btn.create();
+            btn1.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            
+            btn1.setColor(new Color(29, 185, 84));
+            btn1.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 25, 25);
+
+            RoundRectangle2D btnRound = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 25, 25);
+
+            btn1.draw(btnRound);
+
+            btn1.setColor(getForeground());
+            btn1.drawString(getText(), (getWidth() - btn1.getFontMetrics().stringWidth(getText())) / 2, (getHeight() + btn1.getFontMetrics().getAscent() - btn1.getFontMetrics().getDescent()) / 2);
+    
+            btn1.dispose();
+        }
+    }
 }
