@@ -36,6 +36,8 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         menu = new JMenu();
         icon = new JMenuItem();
 
+        lblPage = new JLabel("1/1");
+
         menuBar.setLayout(new GridBagLayout());
         GridBagConstraints lgbc = new GridBagConstraints();
         lgbc.fill = GridBagConstraints.HORIZONTAL;
@@ -214,7 +216,7 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         lblDuration.setFont(new Font("Gotham-Black", Font.BOLD, 16));
 
         lblNum.setBounds(63, 295, 60, 40);
-        lblSongTitle.setBounds(120, 295, 200, 40);
+        lblSongTitle.setBounds(150, 295, 200, 40);
         lblArtists.setBounds(290, 295, 220, 40);
         lblDuration.setBounds(590, 295, 255, 40);
 
@@ -233,14 +235,14 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
             add(lblPlays);
 
             lblRank.setBounds(60, yOffset, 60, 40);
-            lblSong.setBounds(120, yOffset, 200, 40);
+            lblSong.setBounds(150, yOffset, 200, 40);
             lblArtist.setBounds(340, yOffset, 220, 40);
             lblPlays.setBounds(570, yOffset, 254, 40);
 
-            lblRank.setFont(new Font("Gotham-Black", Font.PLAIN, 14));
-            lblSong.setFont(new Font("Gotham-Black", Font.PLAIN, 14));
-            lblArtist.setFont(new Font("Gotham-Black", Font.PLAIN, 14));
-            lblPlays.setFont(new Font("Gotham-Black", Font.PLAIN, 14));
+            lblRank.setFont(new Font("Gotham", Font.BOLD, 14));
+            lblSong.setFont(new Font("Gotham", Font.BOLD, 14));
+            lblArtist.setFont(new Font("Gotham", Font.PLAIN, 14));
+            lblPlays.setFont(new Font("Gotham", Font.PLAIN, 14));
 
             yOffset += 45; // Increase y-coordinate for the next set of labels
         }
@@ -259,7 +261,7 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         btnPrevious.addActionListener(this);
         btnNext.addActionListener(this);
 
-        lblPage = new JLabel("1/5");
+        
         lblPage.setFont(new Font("Gotham", Font.PLAIN, 15));
         lblPage.setBounds(1095, 842, 100, 50);
 
@@ -306,13 +308,14 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         
         if (LENB1.isSelected()){
             // disable btnPrevious and btnNext if selected
-            // set lblPage to 1/1
+            lblPage.setText("1/1");
             /*add arguments for when Top 10 is selected*/
          }
         
         if (LENB2.isSelected()){
             // enable btnPrevious and btnNext depending on current page if selected
             // set lblPaget to n/5
+            lblPage.setText("n/5");
             /*add arguments for when Top 50 is selected*/
          }
         
