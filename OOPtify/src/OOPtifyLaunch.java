@@ -11,8 +11,8 @@ public class OOPtifyLaunch extends JFrame implements ActionListener {
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem icon, title;
-    ImageIcon logo = new ImageIcon("images/Spotify_logo.png");
-    ImageIcon logoBlk = new ImageIcon("images/Spotify.png");
+    ImageIcon logo = new ImageIcon("src/ooptify-gui/OOPtify/bin/images/Spotify_logo.png");
+    ImageIcon logoBlk = new ImageIcon("src/ooptify-gui/OOPtify/bin/images/Spotify.png");
     Image resizedIcon = logoBlk.getImage().getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
     Image resizedLogo = logo.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH);
     ImageIcon mainLogo = new ImageIcon(resizedLogo);

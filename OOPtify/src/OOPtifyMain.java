@@ -9,11 +9,16 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem icon, title;
-    ImageIcon logo = new ImageIcon("images/Spotify_logo.png");
-    ImageIcon logoBlk = new ImageIcon("images/Spotify.png");
+    ImageIcon logo = new ImageIcon("src/ooptify-gui/OOPtify/bin/images/Spotify_logo.png");
+    ImageIcon logoBlk = new ImageIcon("src/ooptify-gui/OOPtify/bin/images/Spotify.png");
     Image resizedIcon = logoBlk.getImage().getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
     ImageIcon menuLogo = new ImageIcon(resizedIcon);
 
+    //Justin Part (Leaked Constructor Moment)
+    JRadioButton YB1, YB2, YB3, LENB1, LENB2;
+    JComboBox<String> ComBCat;
+        
+    
     public OOPtifyMain() {
         // MENU BAR
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -86,28 +91,31 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         setLayout(null);
 
         // JUSTIN PART
-        
-        ImageIcon User = new ImageIcon("images/user.png");
-        
-        
+        ImageIcon UserIcon = new ImageIcon("src/ooptify-gui/OOPtify/bin/images/user.png");
+                
+        JLabel lblUserIcon = new JLabel(UserIcon);
         JLabel lblUser = new JLabel("USERNAME");
         JLabel lblDate = new JLabel("mm/dd/yyyy");
         JLabel lblCat = new JLabel("Category");
         JLabel lblYr = new JLabel("Year");
         JLabel lblLength = new JLabel("Length");
-        
-        JComboBox<String> ComBCat = new JComboBox<>();
+  
+        ComBCat = new JComboBox<>();
         ComBCat.addItem("Top Tracks");
         ComBCat.addItem("Top Artists");
         
-        JRadioButton YB1 = new JRadioButton("2023");
-        JRadioButton YB2 = new JRadioButton("2022");
-        JRadioButton YB3 = new JRadioButton("All Time");
+        ButtonGroup Year = new ButtonGroup();
+        ButtonGroup Length = new ButtonGroup();
         
-        JRadioButton LENB1 = new JRadioButton("Top 10");
-        JRadioButton LENB2 = new JRadioButton("Top 50");
+        YB1 = new JRadioButton("2023");
+        YB2 = new JRadioButton("2022");
+        YB3 = new JRadioButton("All Time");
+        
+        LENB1 = new JRadioButton("Top 10");
+        LENB2 = new JRadioButton("Top 50");
         
         //Labelling
+        add(lblUserIcon);
         add(lblUser);
         add(lblDate);
         add(lblCat);
@@ -120,6 +128,7 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         lblYr.setFont(new Font("Gotham-Black", Font.BOLD, 18));
         lblLength.setFont(new Font("Gotham-Black", Font.BOLD, 18));
 
+        lblUserIcon.setBounds(125, 45, 200, 200);
         lblUser.setBounds(345, 25, 750, 100);
         lblDate.setBounds(350, 80, 200, 100);
         lblCat.setBounds(350, 170, 100, 40);
@@ -127,6 +136,12 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         lblLength.setBounds(840, 170, 100, 40);
         
         //Radio Buttons
+        Year.add(YB1);
+        Year.add(YB2);
+        Year.add(YB3);
+        Length.add(LENB1);
+        Length.add(LENB2);
+        
         add(YB1);
         add(YB2);
         add(YB3);
@@ -150,12 +165,23 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         LENB1.setFont(new Font("Gotham-Light", Font.PLAIN, 15));
         LENB2.setFont(new Font("Gotham-Light", Font.PLAIN, 15));
         
-        YB1.setBounds(570, 200, 100, 45);
-        YB2.setBounds(645, 200, 100, 45);
-        YB3.setBounds(720, 200, 100, 45);
-        LENB1.setBounds(835, 200, 100, 45);
-        LENB2.setBounds(910, 200, 100, 45);
+        YB1.setBounds(570, 200, 70, 45);
+        YB2.setBounds(645, 200, 70, 45);
+        YB3.setBounds(720, 200, 80, 45);
+        LENB1.setBounds(835, 200, 70, 45);
+        LENB2.setBounds(910, 200, 70, 45);
       
+        YB1.addActionListener(this);
+        YB2.addActionListener(this);
+        YB3.addActionListener(this);
+        LENB1.addActionListener(this);
+        LENB2.addActionListener(this);
+                
+        YB1.setSelected(true);
+        LENB1.setSelected(true);
+        
+        YB1.doClick();
+        LENB1.doClick();
         
         //ComboBox
         add(ComBCat);
@@ -163,6 +189,7 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
         ComBCat.setFont(new Font("Gotham-Light", Font.PLAIN, 15));
         ComBCat.setBounds(350, 210, 170, 25);
 
+        ComBCat.setSelectedItem("Top Tracks");
         
         // JOHN GLAY PART
         JLabel lblNum = new JLabel("#");
@@ -234,8 +261,42 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
     }
 
     public void actionPerformed(ActionEvent e) {
+        
         // JUSTIN PART
-
+        
+        if (YB1.isSelected()){
+             /*add arguments for when 2023 is selected*/
+         }
+        
+        if (YB2.isSelected()){
+             /*add arguments for when 2022 is selected*/
+         }
+                  
+        if (YB3.isSelected()){
+             /*add arguments for when All Time is selected*/
+         }
+        
+        if (LENB1.isSelected()){
+             /*add arguments for when Top 10 is selected*/
+         }
+        
+        if (LENB2.isSelected()){
+             /*add arguments for when Top 50 is selected*/
+         }
+        
+        String selectedValue = ComBCat.getSelectedItem().toString();
+        
+        //Still having issues with not updating unless a radio button is pressed
+        if ("Top Tracks".equals(selectedValue)) {
+        
+            //For Top Tracks arguments
+            
+        } 
+        
+        else if ("Top Artists".equals(selectedValue)) {
+        
+            //For Top Artists arguments
+        }
         // JOHN GLAY PART
 
         if (e.getSource() == btnHome) {
@@ -245,13 +306,16 @@ public class OOPtifyMain extends JFrame implements ActionListener, ItemListener 
 
     }
 
-    @Override // white line
+    @Override
     public void paint(Graphics g) {
         super.paint(g);
+        
+        // white line
         g.setColor(Color.GRAY);
         g.drawLine(60, 385, getWidth() - 60, 385);
         
         g.setColor(Color.GRAY);
-        g.drawLine(60, 425, getWidth() - 60, 425);   
+        g.drawLine(60, 425, getWidth() - 60, 425); 
     }
+    
 }
