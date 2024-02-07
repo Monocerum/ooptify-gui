@@ -12,12 +12,10 @@ import java.time.*;
 import java.time.format.*;
 public class MsAccess_database extends JFrame implements ActionListener, ItemListener
 {
-    //LocalTime currentTime = LocalTime.now();
-    //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, yyyy");
+    
     JPanel pnlLeft, pnlRight, pnlInRight;
     JLabel lblImage, lblIcon, lblTitle, lblPage;
     JButton btnHome;
-    RoundButton btnPrevious, btnNext;
     JMenuBar menuBar;
     JMenu menu;
     JMenuItem icon, title;
@@ -26,14 +24,13 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
     Image resizedIcon = logoBlk.getImage().getScaledInstance(40, 40, java.awt.Image.SCALE_SMOOTH);
     ImageIcon menuLogo = new ImageIcon(resizedIcon);
 
-        JLabel lblUser = new JLabel("USERNAME");
-        //String formatDate = currentTime.format(formatter);
-        JLabel lblDate = new JLabel("mm/dd/yyyy");
-        JLabel lblCat = new JLabel("Category");
-        JLabel lblYr = new JLabel("Year");
-        JLabel lblLength = new JLabel("Length");
+    JLabel lblUser = new JLabel("USERNAME");
+    JLabel lblDate = new JLabel("02/08/2024");
+    JLabel lblCat = new JLabel("Category");
+    JLabel lblYr = new JLabel("Year");
+        
     //Justin Part (Leaked Constructor Moment)
-    JRadioButton YB1, YB2, YB3, LENB1, LENB2;
+    JRadioButton YB1, YB2, YB3; //LENB1, LENB2;
     JComboBox<String> ComBCat;
     JLabel[] lblRank = {new JLabel("1"),
                                 new JLabel("2"),
@@ -75,7 +72,18 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
                 new JLabel("0000", JLabel.RIGHT),
                 new JLabel("0000", JLabel.RIGHT),
                 new JLabel("0000", JLabel.RIGHT)};
-    
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        
+        // white line
+        g.setColor(Color.GRAY);
+        g.drawLine(60, 385, getWidth() - 60, 385);
+        
+        g.setColor(Color.GRAY);
+        g.drawLine(60, 425, getWidth() - 60, 425); 
+    }
+            
     MsAccess_database()
     {
         // MENU BAR
@@ -110,7 +118,7 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         lblIcon = new JLabel(menuLogo);
         lblTitle = new JLabel("OOPtify");
         lblTitle.setForeground(Color.black);
-        lblTitle.setFont(new Font("Gotham-Black", Font.PLAIN, 18));
+        lblTitle.setFont(new Font("Aptos", Font.PLAIN, 18));
 
         icon.setIcon(menuLogo);
 
@@ -135,7 +143,7 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         btnHome.setContentAreaFilled(false);
         btnHome.setFocusable(false);
         btnHome.setOpaque(false);
-        btnHome.setFont(new Font("Gotham-Bold", Font.PLAIN, 18));
+        btnHome.setFont(new Font("Aptos", Font.BOLD, 18));
 
         btnHome.addActionListener(this);
 
@@ -150,14 +158,11 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         setLayout(null);
 
         // JUSTIN PART
-        ImageIcon UserIcon = new ImageIcon("C:\\Users\\Abram\\Documents\\1st Sem (2nd Year College)\\Object Oriented Programming\\Group Presentation\\pics\\user.png");
-                
+        ImageIcon Icon = new ImageIcon("C:\\Users\\Abram\\Documents\\1st Sem (2nd Year College)\\Object Oriented Programming\\Group Presentation\\pics\\OOP user.jpg");
+        Image resizedUserIcon = Icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH); 
+        ImageIcon UserIcon = new ImageIcon(resizedUserIcon);
         JLabel lblUserIcon = new JLabel(UserIcon);
-        /*JLabel lblUser = new JLabel("USERNAME");
-        JLabel lblDate = new JLabel("mm/dd/yyyy");
-        JLabel lblCat = new JLabel("Category");
-        JLabel lblYr = new JLabel("Year");
-        JLabel lblLength = new JLabel("Length");*/
+        
   
         ComBCat = new JComboBox<>();
         ComBCat.addItem("Top 10 Tracks");
@@ -170,8 +175,7 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         YB2 = new JRadioButton("2022");
         YB3 = new JRadioButton("All Time");
         
-        LENB1 = new JRadioButton("Top 10");
-        LENB2 = new JRadioButton("Top 50");
+        
         
         //Labelling
         add(lblUserIcon);
@@ -179,33 +183,31 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         add(lblDate);
         add(lblCat);
         add(lblYr);
-        add(lblLength);
+        //add(lblLength);
         
-        lblUser.setFont(new Font("Gotham-BLACK", Font.PLAIN, 64));
-        lblDate.setFont(new Font("Gotham", Font.BOLD, 24));
-        lblCat.setFont(new Font("Gotham", Font.BOLD, 17));
-        lblYr.setFont(new Font("Gotham", Font.BOLD, 17));
-        lblLength.setFont(new Font("Gotham", Font.BOLD, 17));
+        lblUser.setFont(new Font("Aptos", Font.BOLD, 64));
+        lblDate.setFont(new Font("Aptos", Font.BOLD, 24));
+        lblCat.setFont(new Font("Aptos", Font.BOLD, 17));
+        lblYr.setFont(new Font("Aptos", Font.BOLD, 17));
+       
 
         lblUserIcon.setBounds(125, 45, 200, 200);
         lblUser.setBounds(345, 25, 750, 100);
         lblDate.setBounds(350, 80, 200, 100);
         lblCat.setBounds(350, 170, 100, 40);
         lblYr.setBounds(575, 170, 100, 40);
-        lblLength.setBounds(840, 170, 100, 40);
+       
         
         //Radio Buttons
         Year.add(YB1);
         Year.add(YB2);
         Year.add(YB3);
-        Length.add(LENB1);
-        Length.add(LENB2);
+       
         
         add(YB1);
         add(YB2);
         add(YB3);
-        add(LENB1);
-        add(LENB2);
+       
         
         YB1.setForeground(java.awt.Color.WHITE);
         YB1.setContentAreaFilled(false);
@@ -213,45 +215,35 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         YB2.setContentAreaFilled(false);
         YB3.setForeground(java.awt.Color.WHITE);
         YB3.setContentAreaFilled(false);
-        LENB1.setForeground(java.awt.Color.WHITE);
-        LENB1.setContentAreaFilled(false);
-        LENB2.setForeground(java.awt.Color.WHITE);
-        LENB2.setContentAreaFilled(false);
         
-        YB1.setFont(new Font("Gotham-Light", Font.PLAIN, 15));    
-        YB2.setFont(new Font("Gotham-Light", Font.PLAIN, 15));
-        YB3.setFont(new Font("Gotham-Light", Font.PLAIN, 15));
-        LENB1.setFont(new Font("Gotham-Light", Font.PLAIN, 15));
-        LENB2.setFont(new Font("Gotham-Light", Font.PLAIN, 15));
+        
+        YB1.setFont(new Font("Aptos", Font.PLAIN, 15));    
+        YB2.setFont(new Font("Aptos", Font.PLAIN, 15));
+        YB3.setFont(new Font("Aptos", Font.PLAIN, 15));
         
         YB1.setBounds(570, 200, 70, 45);
         YB2.setBounds(645, 200, 70, 45);
         YB3.setBounds(720, 200, 90, 45);
-        LENB1.setBounds(835, 200, 90, 45);
-        LENB2.setBounds(930, 200, 90, 45);
+        
 
         YB1.setFocusable(false);
         YB2.setFocusable(false);
         YB3.setFocusable(false);
-        LENB1.setFocusable(false);
-        LENB2.setFocusable(false);
+        
     
         YB1.addActionListener(this); YB1.addItemListener(this);
         YB2.addActionListener(this); YB2.addItemListener(this);
         YB3.addActionListener(this);
-        LENB1.addActionListener(this);
-        LENB2.addActionListener(this);
+        
                 
         YB1.setSelected(true);
-        LENB1.setSelected(true);
         
         YB1.doClick();
-        LENB1.doClick();
         
         //ComboBox
         add(ComBCat); ComBCat.addActionListener(this);
         
-        ComBCat.setFont(new Font("Gotham-Light", Font.PLAIN, 15));
+        ComBCat.setFont(new Font("Aptos", Font.PLAIN, 15));
         ComBCat.setBounds(350, 210, 170, 25);
 
         ComBCat.setSelectedItem("Top Tracks");
@@ -267,10 +259,10 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         add(lblArtists);
         add(lblDuration);
 
-        lblNum.setFont(new Font("Gotham-Black", Font.BOLD, 16));
-        lblSongTitle.setFont(new Font("Gotham-Black", Font.BOLD, 16));
-        lblArtists.setFont(new Font("Gotham-Black", Font.BOLD, 16));
-        lblDuration.setFont(new Font("Gotham-Black", Font.BOLD, 16));
+        lblNum.setFont(new Font("Aptos", Font.BOLD, 16));
+        lblSongTitle.setFont(new Font("Aptos", Font.BOLD, 16));
+        lblArtists.setFont(new Font("Aptos", Font.BOLD, 16));
+        lblDuration.setFont(new Font("Aptos", Font.BOLD, 16));
 
         lblNum.setBounds(63, 295, 60, 40);
         lblSongTitle.setBounds(150, 295, 200, 40);
@@ -280,8 +272,6 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         int yOffset = 345; // Initial y-coordinate
         int topLen = 10;
 
-            
-        
         for (int i = 0; i < topLen; i++) {
             
             add(lblRank[i]);
@@ -294,38 +284,25 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
             lblArtist[i].setBounds(340, yOffset, 220, 40);
             lblPlays[i].setBounds(570, yOffset, 254, 40);
 
-            lblRank[i].setFont(new Font("Gotham", Font.BOLD, 14));
-            lblSong[i].setFont(new Font("Gotham", Font.BOLD, 14));
-            lblArtist[i].setFont(new Font("Gotham", Font.PLAIN, 14));
-            lblPlays[i].setFont(new Font("Gotham", Font.PLAIN, 14));
+            lblRank[i].setFont(new Font("Aptos", Font.BOLD, 14));
+            lblSong[i].setFont(new Font("Aptos", Font.BOLD, 14));
+            lblArtist[i].setFont(new Font("Aptos", Font.PLAIN, 14));
+            lblPlays[i].setFont(new Font("Aptos", Font.PLAIN, 14));
 
             yOffset += 45; // Increase y-coordinate for the next set of labels
         }
         getContentPane().setBackground(Color.decode("#212121"));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        btnPrevious = new RoundButton("Previous");
-        btnNext = new RoundButton("Next");
-
-        btnPrevious.setBounds(900, 800, 100, 50);
-        btnPrevious.setFont(new Font("Gotham", Font.BOLD, 17));
-        btnNext.setBounds(1020, 800, 100, 50);
-        btnNext.setFont(new Font("Gotham", Font.BOLD, 17));
-
-        btnPrevious.addActionListener(this);
-        btnNext.addActionListener(this);
-
         
-        lblPage.setFont(new Font("Gotham", Font.PLAIN, 15));
+        lblPage.setFont(new Font("Aptos", Font.PLAIN, 15));
         lblPage.setBounds(1095, 842, 100, 50);
 
-        this.add(btnPrevious);
-        this.add(btnNext);
         this.add(lblPage);
 
         this.repaint();
         this.setVisible(true);
     }
+    
 
     public static void main(String[] args) throws Exception
     {
@@ -350,26 +327,12 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
             Connection con = DriverManager.getConnection("jdbc:ucanaccess://C:\\Users\\Abram\\Documents\\1st Sem (2nd Year College)\\Object Oriented Programming\\Group Presentation\\oop-spotify.accdb");
             
         // JUSTIN PART
-
-        if (LENB1.isSelected()){
-            // disable btnPrevious and btnNext if selected
-            lblPage.setText("1/1");
-            /*add arguments for when Top 10 is selected*/
-         }
-        
-        if (LENB2.isSelected()){
-            // enable btnPrevious and btnNext depending on current page if selected
-            // set lblPaget to n/5
-            
-            
-            lblPage.setText("n/5");
-            /*add arguments for when Top 50 is selected*/
-         }
         
         String selectedValue = ComBCat.getSelectedItem().toString();
         
         //Still having issues with not updating unless a radio button is pressed
         if ("Top 10 Tracks".equals(selectedValue)) {
+            repaint();
             String sql1 = "SELECT TOP 10 song_name, artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS song_playtime_hours, username\n" +
                 "FROM listens\n" +
                 //"WHERE username = username AND year = year \n" +
@@ -476,6 +439,7 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         } 
         
         else if ("Top 10 Artists".equals(selectedValue)) {
+            repaint();
             //For Top Artists arguments
             String sql2 = "SELECT TOP 10 artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS artist_playtime_hours, username\n" +
             "FROM listens\n" +
@@ -581,14 +545,6 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         }
         // JOHN GLAY PART
 
-        if (e.getSource() == btnPrevious) {
-            // If page 1, disable
-        }
-
-        if (e.getSource() == btnNext) {
-            // If page 5, disable
-        }
-
         if (e.getSource() == btnHome) {
             new launchProgram();
             dispose();
@@ -601,48 +557,6 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
             Logger.getLogger(MsAccess_database.class.getName()).log(Level.SEVERE, null, ex);   
         }
         
-    }
-
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        
-        // white line
-        g.setColor(Color.GRAY);
-        g.drawLine(60, 385, getWidth() - 60, 385);
-        
-        g.setColor(Color.GRAY);
-        g.drawLine(60, 425, getWidth() - 60, 425); 
-    }
-    
-    class RoundButton extends JButton {
-    
-        public RoundButton(String text) 
-        {
-            super(text); // Invoke superclass (JButton)
-            setContentAreaFilled(false);
-            setFocusPainted(false);
-            setBorderPainted(false);
-        }
-    
-        @Override
-        public void paint(Graphics btn) 
-        {
-            Graphics2D btn1 = (Graphics2D) btn.create();
-            btn1.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            
-            btn1.setColor(new Color(29, 185, 84));
-            btn1.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 25, 25);
-
-            RoundRectangle2D btnRound = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 25, 25);
-
-            btn1.draw(btnRound);
-
-            btn1.setColor(getForeground());
-            btn1.drawString(getText(), (getWidth() - btn1.getFontMetrics().stringWidth(getText())) / 2, (getHeight() + btn1.getFontMetrics().getAscent() - btn1.getFontMetrics().getDescent()) / 2);
-    
-            btn1.dispose();
-        }
     }
 }
 
