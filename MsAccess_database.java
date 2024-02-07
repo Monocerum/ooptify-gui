@@ -160,10 +160,10 @@ public class multiuser extends JFrame implements ActionListener, ItemListener
         setLayout(null);
 
         // JUSTIN PART
-        /*ImageIcon Icon = new ImageIcon("C:\\Users\\Abram\\Documents\\1st Sem (2nd Year College)\\Object Oriented Programming\\Group Presentation\\pics\\OOP user.jpg");
-        Image resizedUserIcon = Icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH); 
-        ImageIcon UserIcon = new ImageIcon(resizedUserIcon);
-        JLabel lblUserIcon = new JLabel(UserIcon);*/
+        ImageIcon Icon = new ImageIcon("C:\\Users\\Abram\\Documents\\1st Sem (2nd Year College)\\Object Oriented Programming\\Group Presentation\\pics\\user.png");
+        //Image resizedUserIcon = Icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH); 
+        //ImageIcon UserIcon = new ImageIcon(resizedUserIcon);
+        JLabel lblUserIcon = new JLabel(Icon);
         
   
         ComBCat = new JComboBox<>();
@@ -182,7 +182,7 @@ public class multiuser extends JFrame implements ActionListener, ItemListener
         
         lblUser.setText(String.valueOf(selected));
         //Labelling
-        //add(lblUserIcon);
+        add(lblUserIcon);
         add(lblUser);
         add(lblDate);
         add(lblCat);
@@ -195,7 +195,7 @@ public class multiuser extends JFrame implements ActionListener, ItemListener
         lblYr.setFont(new Font("Aptos", Font.BOLD, 17));
        
 
-        //lblUserIcon.setBounds(125, 45, 200, 200);
+        lblUserIcon.setBounds(125, 45, 200, 200);
         lblUser.setBounds(345, 25, 750, 100);
         lblDate.setBounds(350, 80, 200, 100);
         lblCat.setBounds(350, 170, 100, 40);
@@ -549,4 +549,3 @@ public class multiuser extends JFrame implements ActionListener, ItemListener
         
     }
 }
-
