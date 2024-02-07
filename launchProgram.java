@@ -46,7 +46,7 @@ public class launchProgram extends JFrame implements ActionListener
         lblIcon = new JLabel(menuLogo);
         lblTitle = new JLabel("OOPtify");
         lblTitle.setForeground(Color.black);
-        lblTitle.setFont(new Font("Gotham-Black", Font.PLAIN, 15));
+        lblTitle.setFont(new Font("Aptos", Font.BOLD, 15));
 
         icon.setIcon(menuLogo);
 
@@ -69,7 +69,7 @@ public class launchProgram extends JFrame implements ActionListener
         pnlTtl = new JPanel(new FlowLayout(FlowLayout.CENTER));
         
         lblMainTitle = new JLabel("OOPtify");
-        lblMainTitle.setFont(new Font("Gotham-Bold", Font.PLAIN, 70));
+        lblMainTitle.setFont(new Font("Aptos", Font.BOLD, 70));
         lblMainTitle.setForeground(Color.white);
 
         pnlTtl.setBorder(new EmptyBorder(0, 0, 20, 0));
@@ -79,7 +79,7 @@ public class launchProgram extends JFrame implements ActionListener
         JPanel pnlLbl;
         pnlLbl = new JPanel(new FlowLayout(FlowLayout.LEADING, 10, 2));
         lblWelcome = new JLabel("welcome to");
-        lblWelcome.setFont(new Font("Gotham-Light", Font.PLAIN, 30));
+        lblWelcome.setFont(new Font("Aptos", Font.PLAIN, 30));
         lblWelcome.setForeground(Color.white);
 
         pnlLbl.setBorder(new EmptyBorder(20, 0, -5, 0));
@@ -87,7 +87,7 @@ public class launchProgram extends JFrame implements ActionListener
         pnlLbl.add(lblWelcome);
 
         btnLaunch = new RoundButton("Launch");
-        btnLaunch.setFont(new Font("Gotham", Font.BOLD, 18));
+        btnLaunch.setFont(new Font("Aptos", Font.BOLD, 18));
         btnLaunch.setPreferredSize(new Dimension(250, 50));
         btnLaunch.setBackground(new Color(29, 185, 84));
         btnLaunch.setForeground(Color.black);
@@ -115,11 +115,13 @@ public class launchProgram extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        String[] names = {"12159224691", "Placeholder 2", "Placeholder 3"};
+        //String[] names = {"12159224691", "Placeholder 2", "Placeholder 3"};
 
         if (e.getSource() == btnLaunch)
         {
-            String[] options = {"12159224691", "Placeholder 2", "Placeholder 3"};
+            new MsAccess_database();
+                dispose();
+            /*String[] options = {"12159224691", "Placeholder 2", "Placeholder 3"};
             Object selected = JOptionPane.showInputDialog(null, "Choose User:", "Title", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
             if (names[0].equals(selected))
@@ -136,7 +138,7 @@ public class launchProgram extends JFrame implements ActionListener
             {
                 new MsAccess_database();
                 dispose();
-            }
+            }*/
         }
     }
    
