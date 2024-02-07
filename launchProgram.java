@@ -1,4 +1,3 @@
-
 package msaccess_database;
 
 import java.awt.*;
@@ -119,8 +118,10 @@ public class launchProgram extends JFrame implements ActionListener
 
         if (e.getSource() == btnLaunch)
         {
-            new MsAccess_database();
+            new multiuser();
                 dispose();
+            //new MsAccess_database();
+                //dispose();
             /*String[] options = {"12159224691", "Placeholder 2", "Placeholder 3"};
             Object selected = JOptionPane.showInputDialog(null, "Choose User:", "Title", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
