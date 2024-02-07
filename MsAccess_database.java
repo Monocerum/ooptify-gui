@@ -1,4 +1,3 @@
-
 package msaccess_database;
 
 import java.sql.*;  
@@ -10,8 +9,11 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import java.time.*;
 import java.time.format.*;
-public class MsAccess_database extends JFrame implements ActionListener, ItemListener
+public class multiuser extends JFrame implements ActionListener, ItemListener
 {
+    String[] names = {"Duncan", "Abram", "John Glay", "Roxanne", "Kevin", "Bao"};
+    String[] options = {"Duncan", "Abram", "John Glay", "Roxanne", "Kevin", "Bao"};
+    Object selected = JOptionPane.showInputDialog(null, "Choose User:", "Usernames", JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
     
     JPanel pnlLeft, pnlRight, pnlInRight;
     JLabel lblImage, lblIcon, lblTitle, lblPage;
@@ -30,18 +32,18 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
     JLabel lblYr = new JLabel("Year");
         
     //Justin Part (Leaked Constructor Moment)
-    JRadioButton YB1, YB2, YB3; //LENB1, LENB2;
+    JRadioButton YB0, YB1, YB2, YB3; //LENB1, LENB2;
     JComboBox<String> ComBCat;
     JLabel[] lblRank = {new JLabel("1"),
-                                new JLabel("2"),
-                                new JLabel("3"),
-                                new JLabel("4"),
-                                new JLabel("5"),
-                                new JLabel("6"),
-                                new JLabel("7"),
-                                new JLabel("8"),
-                                new JLabel("9"),
-                                new JLabel("10")};
+                        new JLabel("2"),
+                        new JLabel("3"),
+                        new JLabel("4"),
+                        new JLabel("5"),
+                        new JLabel("6"),
+                        new JLabel("7"),
+                        new JLabel("8"),
+                        new JLabel("9"),
+                        new JLabel("10")};
     JLabel[] lblSong = {new JLabel("Song Title"),
                 new JLabel("Song Title"),
                 new JLabel("Song Title"),
@@ -84,7 +86,7 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         g.drawLine(60, 425, getWidth() - 60, 425); 
     }
             
-    MsAccess_database()
+    multiuser()
     {
         // MENU BAR
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -158,27 +160,29 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         setLayout(null);
 
         // JUSTIN PART
-        ImageIcon Icon = new ImageIcon("C:\\Users\\Abram\\Documents\\1st Sem (2nd Year College)\\Object Oriented Programming\\Group Presentation\\pics\\OOP user.jpg");
+        /*ImageIcon Icon = new ImageIcon("C:\\Users\\Abram\\Documents\\1st Sem (2nd Year College)\\Object Oriented Programming\\Group Presentation\\pics\\OOP user.jpg");
         Image resizedUserIcon = Icon.getImage().getScaledInstance(240, 240, java.awt.Image.SCALE_SMOOTH); 
         ImageIcon UserIcon = new ImageIcon(resizedUserIcon);
-        JLabel lblUserIcon = new JLabel(UserIcon);
+        JLabel lblUserIcon = new JLabel(UserIcon);*/
         
   
         ComBCat = new JComboBox<>();
+        ComBCat.addItem("(Select Category)");
         ComBCat.addItem("Top 10 Tracks");
         ComBCat.addItem("Top 10 Artists");
         
         ButtonGroup Year = new ButtonGroup();
         ButtonGroup Length = new ButtonGroup();
         
-        YB1 = new JRadioButton("2023");
-        YB2 = new JRadioButton("2022");
-        YB3 = new JRadioButton("All Time");
+        YB0 = new JRadioButton("", true);
+        YB1 = new JRadioButton("2023", false);
+        YB2 = new JRadioButton("2022", false);
+        YB3 = new JRadioButton("All Time", false);
         
         
-        
+        lblUser.setText(String.valueOf(selected));
         //Labelling
-        add(lblUserIcon);
+        //add(lblUserIcon);
         add(lblUser);
         add(lblDate);
         add(lblCat);
@@ -191,7 +195,7 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         lblYr.setFont(new Font("Aptos", Font.BOLD, 17));
        
 
-        lblUserIcon.setBounds(125, 45, 200, 200);
+        //lblUserIcon.setBounds(125, 45, 200, 200);
         lblUser.setBounds(345, 25, 750, 100);
         lblDate.setBounds(350, 80, 200, 100);
         lblCat.setBounds(350, 170, 100, 40);
@@ -199,6 +203,7 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
        
         
         //Radio Buttons
+        Year.add(YB0);
         Year.add(YB1);
         Year.add(YB2);
         Year.add(YB3);
@@ -308,11 +313,13 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
     {
         UIManager.put("Label.foreground", Color.WHITE); // To make the text color white
         SwingUtilities.invokeLater(() -> {
-            MsAccess_database frame = new MsAccess_database();
+            multiuser frame = new multiuser();
             frame.setSize(1200, 1000); // Set an initial size
             frame.setLocationRelativeTo(null); // Center the frame on the screen
             frame.setVisible(true);
         });
+        
+        
     }
         
     public void itemStateChanged(ItemEvent e) {
@@ -329,40 +336,23 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         // JUSTIN PART
         
         String selectedValue = ComBCat.getSelectedItem().toString();
-        
+        String username = String.valueOf(selected);
         //Still having issues with not updating unless a radio button is pressed
         if ("Top 10 Tracks".equals(selectedValue)) {
             repaint();
-            String sql1 = "SELECT TOP 10 song_name, artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS song_playtime_hours, username\n" +
-                "FROM listens\n" +
-                //"WHERE username = username AND year = year \n" +
-                "GROUP BY song_name, artist_name, username\n" +
-                "ORDER BY 3 DESC;";
-            Statement statement = con.createStatement();
-            ResultSet result = statement.executeQuery(sql1);
+            
+            Statement statement;
+            ResultSet result;
             
             int i = 0;
             
-            while(result.next())
-            {
-                String name = result.getString("artist_name");
-                String song = result.getString("song_name");
-                String playtime = result.getString("song_playtime_hours");
-                String user = result.getString("username");
-                
-                lblUser.setText(user);
-                lblSong[i].setText(song);
-                lblArtist[i].setText(name);
-                lblPlays[i].setText(playtime);
-                i++;
-            }
             //For Top Tracks arguments
             if (YB1.isSelected()){
             /*add arguments for when 2023 is selected*/
-            String sql3 = "SELECT TOP 10 song_name, artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS song_playtime_hours, username\n" +
-                "FROM listens\n" +
-                "WHERE ts >= #01/01/2023#\n" +
-                "GROUP BY song_name, artist_name, username\n" +
+            String sql3 = "SELECT TOP 10 song_name, artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS song_playtime_hours\n" +
+                "FROM test\n" +
+                "WHERE ts >= #01/01/2023# AND username = '" + username + "'\n" +
+                "GROUP BY song_name, artist_name\n" +
                 "ORDER BY 3 DESC";
             statement = con.createStatement();
             result = statement.executeQuery(sql3);
@@ -374,9 +364,9 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
                 String name = result.getString("artist_name");
                 String song = result.getString("song_name");
                 String playtime = result.getString("song_playtime_hours");
-                String user = result.getString("username");
+                //String user = result.getString("username");
                 
-                lblUser.setText(user);
+                //lblUser.setText(user);
                 lblSong[i].setText(song);
                 lblArtist[i].setText(name);
                 lblPlays[i].setText(playtime);
@@ -386,10 +376,10 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         
         if (YB2.isSelected()){
             /*add arguments for when 2022 is selected*/
-            String sql4 = "SELECT TOP 10 song_name, artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS song_playtime_hours, username\n" +
-                "FROM listens\n" +
-                "WHERE ts <= #01/01/2023# AND  ts >= #01/01/2022#\n" +
-                "GROUP BY song_name, artist_name, username\n" +
+            String sql4 = "SELECT TOP 10 song_name, artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS song_playtime_hours\n" +
+                "FROM test\n" +
+                "WHERE ts <= #01/01/2023# AND ts >= #01/01/2022# AND username = '" + username + "'\n" +
+                "GROUP BY song_name, artist_name\n" +
                 "ORDER BY 3 DESC";
             statement = con.createStatement();
             result = statement.executeQuery(sql4);
@@ -401,21 +391,22 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
                 String name = result.getString("artist_name");
                 String song = result.getString("song_name");
                 String playtime = result.getString("song_playtime_hours");
-                String user = result.getString("username");
+                //String user = result.getString("username");
                 
-                lblUser.setText(user);
+                //lblUser.setText(user);
                 lblSong[i].setText(song);
                 lblArtist[i].setText(name);
                 lblPlays[i].setText(playtime);
                 i++;
             }
-         }
+        }
                   
         if (YB3.isSelected()){
             /*add arguments for when All Time is selected*/
-            String sql5 = "SELECT TOP 10 song_name, artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS song_playtime_hours, username\n" +
-                "FROM listens\n" +
-                "GROUP BY song_name, artist_name, username\n" +
+            String sql5 = "SELECT TOP 10 song_name, artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS song_playtime_hours\n" +
+                "FROM test\n" +
+                "WHERE username = '" + username + "'\n" + 
+                "GROUP BY song_name, artist_name\n" +
                 "ORDER BY 3 DESC";
             statement = con.createStatement();
             result = statement.executeQuery(sql5);
@@ -427,9 +418,9 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
                 String name = result.getString("artist_name");
                 String song = result.getString("song_name");
                 String playtime = result.getString("song_playtime_hours");
-                String user = result.getString("username");
+                //String user = result.getString("username");
                 
-                lblUser.setText(user);
+                //lblUser.setText(user);
                 lblSong[i].setText(song);
                 lblArtist[i].setText(name);
                 lblPlays[i].setText(playtime);
@@ -440,35 +431,18 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         
         else if ("Top 10 Artists".equals(selectedValue)) {
             repaint();
-            //For Top Artists arguments
-            String sql2 = "SELECT TOP 10 artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS artist_playtime_hours, username\n" +
-            "FROM listens\n" +
-            "GROUP BY artist_name, username\n" +
-            "ORDER BY 2 DESC";
             
-            Statement statement = con.createStatement();
-            ResultSet result = statement.executeQuery(sql2);
             
-            int i = 0;
-            while(result.next())
-            {
-                String name = result.getString("artist_name");
-                String playtime = result.getString("artist_playtime_hours");
-                String user = result.getString("username");
-            
-                lblUser.setText(user);
-                lblSong[i].setText("");
-                lblArtist[i].setText(name);
-                lblPlays[i].setText(playtime);
-                i++;
-            }
+            Statement statement;
+            ResultSet result;
+            int i;
             
             if (YB1.isSelected()){
             /*add arguments for when 2023 is selected*/
-            String sql3 = "SELECT TOP 10 artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS artist_playtime_hours, username\n" +
-                "FROM listens\n" +
-                "WHERE ts >= #01/01/2023#\n" +
-                "GROUP BY artist_name, username\n" +
+            String sql3 = "SELECT TOP 10 artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS artist_playtime_hours\n" +
+                "FROM test\n" +
+                "WHERE ts >= #01/01/2023# AND username = '" + username + "'\n" +
+                "GROUP BY artist_name\n" +
                 "ORDER BY 2 DESC;";
             statement = con.createStatement();
             result = statement.executeQuery(sql3);
@@ -480,10 +454,11 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
                 String name = result.getString("artist_name");
                 //String song = result.getString("song_name");
                 String playtime = result.getString("artist_playtime_hours");
-                String user = result.getString("username");
+                //String user = result.getString("username");
                 
-                lblUser.setText(user);
+                //lblUser.setText(user);
                 //lblSong[i].setText(song);
+                lblSong[i].setText("");
                 lblArtist[i].setText(name);
                 lblPlays[i].setText(playtime);
                 i++;
@@ -492,10 +467,10 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
         
         if (YB2.isSelected()){
             /*add arguments for when 2022 is selected*/
-            String sql4 = "SELECT TOP 10 artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS artist_playtime_hours, username\n" +
-                "FROM listens\n" +
-                "WHERE ts <= #01/01/2023# AND ts >= #01/01/2022#\n" +
-                "GROUP BY artist_name, username\n" +
+            String sql4 = "SELECT TOP 10 artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS artist_playtime_hours\n" +
+                "FROM test\n" +
+                "WHERE ts <= #01/01/2023# AND ts >= #01/01/2022# AND username = '" + username + "'\n" +
+                "GROUP BY artist_name\n" +
                 "ORDER BY 2 DESC;";
             statement = con.createStatement();
             result = statement.executeQuery(sql4);
@@ -507,10 +482,11 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
                 String name = result.getString("artist_name");
                 //String song = result.getString("song_name");
                 String playtime = result.getString("artist_playtime_hours");
-                String user = result.getString("username");
+                //String user = result.getString("username");
                 
-                lblUser.setText(user);
+                //lblUser.setText(user);
                 //lblSong[i].setText(song);
+                lblSong[i].setText("");
                 lblArtist[i].setText(name);
                 lblPlays[i].setText(playtime);
                 i++;
@@ -519,9 +495,10 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
                   
         if (YB3.isSelected()){
             /*add arguments for when All Time is selected*/
-            String sql5 = "SELECT TOP 10 artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS artist_playtime_hours, username\n" +
-                "FROM listens\n" +
-                "GROUP BY artist_name, username\n" +
+            String sql5 = "SELECT TOP 10 artist_name, (SUM(ms_played) / 1000 / 60 / 60) AS artist_playtime_hours\n" +
+                "FROM test\n" +
+                "WHERE username = '" + username + "'\n" + 
+                "GROUP BY artist_name\n" +
                 "ORDER BY 2 DESC;";
             statement = con.createStatement();
             result = statement.executeQuery(sql5);
@@ -533,15 +510,28 @@ public class MsAccess_database extends JFrame implements ActionListener, ItemLis
                 String name = result.getString("artist_name");
                 //String song = result.getString("song_name");
                 String playtime = result.getString("artist_playtime_hours");
-                String user = result.getString("username");
+                //String user = result.getString("username");
                 
-                lblUser.setText(user);
+                //lblUser.setText(user);
                 //lblSong[i].setText(song);
+                lblSong[i].setText("");
                 lblArtist[i].setText(name);
                 lblPlays[i].setText(playtime);
                 i++;
             }
-         }
+        }
+        
+
+        }
+        else
+        {
+            repaint();
+            for(int i = 0; i < 10; i++)
+            {
+                lblSong[i].setText("");
+                lblArtist[i].setText("");
+                lblPlays[i].setText("");
+            }
         }
         // JOHN GLAY PART
 
